@@ -112,10 +112,11 @@ static NSString *CellIdentifier = @"AFCollectionViewCell";
     
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            change[@(type)] = @[@(sectionIndex)];
+        //The Same as the Original Gits
+            change[@(type)] = @(sectionIndex);
             break;
         case NSFetchedResultsChangeDelete:
-            change[@(type)] = @[@(sectionIndex)];
+            change[@(type)] = @(sectionIndex);
             break;
     }
     
@@ -187,15 +188,19 @@ static NSString *CellIdentifier = @"AFCollectionViewCell";
                     {
                         case NSFetchedResultsChangeInsert:
                             [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                            [self.collectionView.window endEditing:YES];
                             break;
                         case NSFetchedResultsChangeDelete:
                             [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                            [self.collectionView.window endEditing:YES];
                             break;
                         case NSFetchedResultsChangeUpdate:
                             [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                            [self.collectionView.window endEditing:YES];
                             break;
                         case NSFetchedResultsChangeMove:
                             [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                            [self.collectionView.window endEditing:YES];
                             break;
                     }
                 }];
